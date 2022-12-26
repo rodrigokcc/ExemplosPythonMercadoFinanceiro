@@ -1,4 +1,4 @@
-import matplotlib.pyplot as fig
+import matplotlib.pyplot as plt
 import datetime as dt
 import pandas_datareader.data as web
 import yfinance as yf
@@ -9,13 +9,10 @@ fim=dt.datetime(2021,2,5)
 
 aapl= yf.Ticker("^bvsp").history(start=inicio,end=fim)
 
-print(aapl)
-
-
-#df=web.DataReader('MSFT','yahoo',inicio,fim)
-
-
-x = aapl['Close']
-print(x)
-fig.plot(aapl)
-fig.show()
+close_prices = aapl['Close']
+dates = aapl.index
+plt.plot(dates, close_prices)
+plt.xticks(dates)
+plt.gca().set_xticklabels(dates.strftime('%d'))
+plt.xticks(dates[::20])
+plt.show()
